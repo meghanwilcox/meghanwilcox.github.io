@@ -1,0 +1,100 @@
+/*add header and regular comments*/
+/*check for redundancy*/
+
+.heading{
+    color: #a4a400;
+    background-color: #F0F0F0;
+    text-align: left;
+    font-family: Lucida Sans Unicode, Helvetica, Arial;
+    font-size: 18pt;
+    text-decoration: underline;
+}
+
+#main_header{
+    text-align: center;
+    font-size: 22pt;
+    font-weight: bold;
+}
+
+body{
+    background-color: white;
+    color: #404040;
+    font-size: 11pt;
+    font-family: Georgia, Garamond;
+    background-image: url('silverware.jpg');
+    background-repeat: repeat;
+    background-attachment: fixed;
+    background-size: auto;
+}
+
+.comments{
+    background-color: #FFFFA8;
+    font-style: italic;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+#cake{
+    text-decoration: line-through;
+}
+
+.links{
+    color: #a4a400;
+    font-size: 11pt;
+    font-family: Georgia, Garamond;
+}
+
+#copyright_notice{
+    font-family: monospace;
+}
+
+.hover_abbrv{
+    position: relative;
+    cursor: help;
+    text-decoration: underline;
+    border-bottom: 1px dotted #000;
+}
+
+.hover_abbrv::after{
+    content: attr(data-tooltip);
+    position: absolute;
+    top: -20px; /* Adjust the distance of the tooltip from the text */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.hover_abbrv:hover::after{
+    opacity: 1;
+}
+
+.pie_bullet{
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.pie_bullet::before{
+    content: ''; 
+    background: url('pie_icon.gif') no-repeat; 
+    width: 15px; 
+    height: 15px; 
+    display: inline-block;
+    position: absolute; 
+    left: -20px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+}
+
+hr{
+    border: 0px;
+    height: 3px;
+    background-color: #615e5e;
+    margin: 10px 0;
+}

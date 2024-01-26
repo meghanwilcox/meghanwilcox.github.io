@@ -1,0 +1,63 @@
+/*add header and regular comments*/
+/*check for redundancy*/
+
+#main_header{
+    text-align: center;
+    font-size:40pt;
+    font-weight: bold;
+    color: #a4a400;
+    background-color: #F0F0F0;
+    font-family: Lucida Sans Unicode, Helvetica, Arial;
+    text-decoration: underline;
+    margin-left: 550px;
+    margin-right:550px;
+}
+
+#pie{
+    float: left;
+    margin-right: 20px;
+}
+
+.text_box{
+    overflow: hidden;
+    background-color: #F0F0F0;
+    color: #404040;
+    font-size: 18pt;
+    font-family: Georgia, Garamond;
+    margin: 10px;
+    border-radius: 20px;
+}
+
+p{
+    margin-left: 15px;
+    text-align: center;
+}
+
+#link_to_pie_recipe{
+    margin: 20px;
+    font-size: 24pt;
+    font-weight: bold;
+    color: #a4a400;
+    margin-left: 375px;
+    margin-right: 375px;
+}
+
+body{
+    background-image: url('https://th.bing.com/th/id/OIP.lscnPkfNMvOTQ1D567FqPAHaHa?pid=ImgDet&w=186&h=186&c=7&dpr=1.4');
+    background-repeat: repeat;
+    background-attachment: fixed;
+    background-size: auto;
+}
+
+#copyright_notice{
+    font-size: 12pt;
+}
+
+.review{
+    font-size: 15pt;
+}
+
+#small_review{
+    margin-left: 620px;
+    margin-right: 620px;
+}
