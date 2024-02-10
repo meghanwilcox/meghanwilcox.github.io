@@ -1,0 +1,129 @@
+html, #back-button{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body{
+   background-color: rgb(6, 58, 136); 
+   color: white;
+}
+
+header #header-container{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding:0px;
+    height: fit-content;
+}
+
+header #title p{
+    font-size: 60pt;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding:0px
+}
+
+header #back-button{
+    height: 100px;
+    width: 450px;
+    font-size: 30pt;
+    background-color: rgb(6, 58, 136);
+    border: 5px solid yellow;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+header #back-button:hover{
+    background-color: rgb(0, 170, 255);
+}
+
+header #underline{
+    width: 650px;
+    height: 40px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 48%;
+}
+
+#intro{
+    text-align: center;
+    margin: 20px 20px 50px 50px;
+}
+
+#title-container{
+    display: inline-flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+#rec-dishes-title, #meal-plan-title{
+    text-align: center;
+    font-size:25pt;
+    width: 100%;
+    height:fit-content;
+}
+
+#meal-plan-container{
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+#recommended-dishes{
+    border: 5px solid white;
+    border-radius: 20px;
+    width: 45%;
+    height:fit-content;
+}
+
+#meal-plan{
+    border: 5px solid rgb(255, 255, 255);
+    border-radius: 20px;
+    width: 45%;
+    height:fit-content;
+}
+
+.photo{
+    width: 150px;
+    height: 200px;
+    border-radius: 20px;
+    margin-left: 25px;
+    margin-right: 25px;
+    cursor: pointer;
+}
+
+.rec-dishes{
+    display: inline-flex;
+    flex-direction: row;
+    margin: 15px 15px 15px 15px;
+}
+
+.remove-from-plan{
+    margin-left: 200px;
+    background-color: rgb(6, 58, 136);
+    border: 5px solid yellow;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+.remove-from-plan:hover{
+    background-color: rgb(0, 170, 255);
+}
+.add-another-order{
+    background-color: rgb(6, 58, 136);
+    border: 5px solid yellow;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;    
+}
+
+.add-another-order:hover{
+    background-color: rgb(0, 170, 255);    
+}
+
+#meal-plan p{
+    margin-left: 200px;
+}
