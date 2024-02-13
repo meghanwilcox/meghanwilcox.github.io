@@ -1,118 +1,134 @@
+
+
 //this function will be called as soon as the page is loaded
 document.addEventListener('DOMContentLoaded', function () {
     //this creates an object for each recommended dish item on the recommeneded dish side of the screen, so that this information
     //can be displayed on the leam plan page as a div element. These objects are stored in an array.
     const foodItems = [
-        {name: "Mangonada",  cost: 5.00 }, {name: "Cucumber Lime Agua Fresca",  cost: 5.00 }, {name: "Street Corn",  cost: 5.00 }, {name: "Chicken Sandwich", cost: 8.50}, 
-        {name: "Veggie Dogs", cost: 3.50}, {name: "Turkey Burger", cost: 9.00}, {name: "Easy Plateau Pizza", cost: 21.95}, {name: "MockingBird Sing Pizza", cost: 21.95},
-        {name: "Peach Cobbler with Ice Cream", cost: 5.95}
+        { name: "Mangonada", cost: 6.50 },
+        { name: "Cucumber Lime Agua Fresca", cost: 5.99 },
+        { name: "Street Corn",  cost: 7.50 },
+        { name: "Chicken Sandwich", cost: 8.50}, 
+        { name: "Veggie Dogs", cost: 3.50},
+        { name: "Turkey Burger", cost: 9.00},
+        { name: "Easy Plateau Pizza", cost: 21.95},
+        { name: "Mockingbird Sing Pizza", cost: 21.95},
+        { name: "Peach Cobbler with Ice Cream", cost: 5.95}
     ];
 
     //this creates an array to store the meal plan items that are added to the meal plan page
-    const mealPlanPage = [];
+    const itemsAddedToMealPlan = [];
 
-    // function: updateFoodItems: this function updates the food items that are displayed on the recommended dish side of the webpage
-    function updatefoodItems() {
+    // function: addDishToMealPlan: adds a dish to the meal plan side of the page
+    function addDishToMealPlan(index) {
+        //fetch the specified dish from the array of dishes
+        const selectedDish = foodItems[index];
 
-        //fetch the html food container element in which the dishesto be displayed are held
-        const foodContainer = document.getElementById('recommended-dishes');
+        //add a new dish to the meal plan page array for the selected dish
+        itemsAddedToMealPlan.push({ ...selectedDish, originalIndex: index });
+
+        //call this function to update the meal plan page with this change
+        updateitemsAddedToMealPlan();
+    }    
+
+    // function: removeDishFromMealPlan: function to remove dish from the meal plan page
+    function removeDishFromMealPlan(index) {
+
+        //remove the specified dish from the meal plan page array
+        itemsAddedToMealPlan.splice(index, 1);
+        
+        //call this function to update the meal plan page with this change
+        updateitemsAddedToMealPlan();
+    }
+
+    // function: refreshMealPlanPage: this function updates the food items that are displayed on the recommended dish side of the webpage
+    function refreshMealPlanPage() {
+
+        //fetch the html container element in which the dishesto be displayed are held
+        const dishRecsContainer = document.getElementById('recommended-dishes');
 
         //loop through each dish that was added to the array 
         foodItems.forEach((dish, index) => {
+
             //create a div element for each dish
-            const mealPlanItem = document.createElement('div');
+            const recDishDiv = document.createElement('div');
 
             //add the div to the rec-dishes class
-            mealPlanItem.classList.add('rec-dishes');
+            recDishDiv.classList.add('rec-dishes');
 
             //format the text to output the name and cost of the dish
-            mealPlanItem.innerHTML = `
+            recDishDiv.innerHTML = `
                 <img class="photo" data-index="${index}" src="images/${dish.name.toLowerCase()}.jpg" alt="">
-                <p>${dish.name} - $${dish.cost.toFixed(2)}</p>`;
+                <p>${dish.name}<br>
+                    $${dish.cost.toFixed(2)}
+                </p>`;
             
-            // attach an event listener to the dish's picture
-            mealPlanItem.querySelector('.photo').addEventListener('click', function () {
-                //add the dish to the meal plan page once it is clicked
-                addTomealPlanPage(index);
+            // Add event listener to the dish's picture
+            recDishDiv.querySelector('.photo').addEventListener('click', function () {
+                addDishToMealPlan(index);
             });
 
             // add the div to the food container
-            foodContainer.appendChild(mealPlanItem);
+            dishRecsContainer.appendChild(recDishDiv);
         });
     }
 
-    // function: updateMealPlanPage: this funciton updates the meal plan side of the page with the user's selections
-    function updatemealPlanPage() {
+    // function: updateitemsAddedToMealPlan: this funciton updates the meal plan side of the page with the user's selections
+    function updateitemsAddedToMealPlan() {
+        // fetch the contaner for the meal plan part of the page
+        const itemsAddedToMealPlanContainer = document.getElementById('meal-plan');
 
-        //fetch the container for the meal plan side of the page
-        const mealPlanPageContainer = document.getElementById('meal-plan');
+        //clear existing content
+        itemsAddedToMealPlanContainer.innerHTML = "";
 
-        //initialize the total cost to be zero
-        let total = 0;
+        //initialize total cost to zero
+        let totalCost = 0;
 
-        //loop through the dishes that have been added to the meal plan page array, creating a new div element for each one
-        mealPlanPage.forEach((order, index) => {
-            const orderCost = document.createElement('div');
+        //iterate through the dishes in the meal plan array
+        itemsAddedToMealPlan.forEach((order, index) => {
 
-            //update the item to be in the meal-plan-item class
-            orderCost.classList.add('meal-plan-item');
-
-            //format the display for the html, adding buttons for adding or removing another item
-            orderCost.innerHTML = `
-                <p>${order.name} - $${order.cost.toFixed(2)}
+            //for each dish create a div element, and assign it to the meal-plan-item class
+            const mealPlanItemDiv = document.createElement('div');
+            mealPlanItemDiv.classList.add('meal-plan-item');
+            
+            //format the output of the html to display the name and cost of the dish
+            mealPlanItemDiv.innerHTML = `
+                <p>${order.name}<br>
+                    $${order.cost.toFixed(2)}
                 </p>
                 <button class="remove-from-plan" data-index="${index}">Remove</button>
                 <button class="add-another-order" data-index="${index}">Add Another Order</button>`;
             
-            // Update total cost with the addition of the item
-            total += order.cost;
+            // Update total cost as an order is added to the meal plan
+            totalCost += order.cost;
 
-            // add an event listener to the "remove" button for meal plan item, so that when it is clicked it can remove the item from the meal plan page and the total cost is updated
-            orderCost.querySelector('.remove-from-plan').addEventListener('click', function () {
-                removeFrommealPlanPage(index);
+            // Add an event listener to the remove from plan button in the meal plan item div
+            mealPlanItemDiv.querySelector('.remove-from-plan').addEventListener('click', function () {
+                //when the button is clicked, call the function to remove the item from the meal plan
+                removeDishFromMealPlan(index);
             });
 
-            //add an event listener to the "add another order" button for the meal plan item, so that when it is clicked an additional quantity is added to the meal plan page and the total cost is updated
-            orderCost.querySelector('.add-another-order').addEventListener('click', function () {
-                addTomealPlanPage(order.originalIndex);
+            // add an event listener to the add another order button in the meal plan item div
+            mealPlanItemDiv.querySelector('.add-another-order').addEventListener('click', function () {
+                //when the button is clicked, call the funciton to add a duplicate order to the meal plan
+                addDishToMealPlan(order.originalIndex);
             });
 
-            //add the meal plan item div element to the container on the html page
-            mealPlanPageContainer.appendChild(orderCost);
+            // add this created div to the meal plan container
+            itemsAddedToMealPlanContainer.appendChild(mealPlanItemDiv);
         });
 
-        // create a paragraph html element and inside display the total cost of the meal plan
-        const totalElement = document.createElement('p');
-        totalElement.innerHTML = `<strong>Total Cost:</strong> $${total.toFixed(2)}`;
-
-        //add the element created for the total cost to the meal plan container on the page
-        mealPlanPageContainer.appendChild(totalElement);
+        // Display total cost by creating a parapgrah html element, formatting text to go into it, and then adding it to the meal plan container
+        const pElementForTotalCost = document.createElement('p');
+        pElementForTotalCost.innerHTML = `<strong>Total Cost:</strong> $${totalCost.toFixed(2)}`;
+        itemsAddedToMealPlanContainer.appendChild(pElementForTotalCost);
     }
 
-    // function: addToMealPlanPage: this function adds a dish to the mealPLanPage array, and then calls the updateMealPlanPage function to update the page with the new addition
-    function addTomealPlanPage(index) {
 
-        //get the selected meal item from the array of food items
-        const selectedDish = foodItems[index];
 
-        //append this item to the end of the mealPlanPage array
-        mealPlanPage.push({ ...selectedDish, originalIndex: index });
 
-        // update the meal plan
-        updatemealPlanPage();
-    }
-
-    // function: removefromMealPlanPage: this function removes a dish from the mealPlanPage array, and then calls the updateMealPlanPage function to update the page with its absence
-    function removeFrommealPlanPage(index) {
-
-        //remove the food item from the mealPlanPage array at the specified index
-        mealPlanPage.splice(index, 1);
-
-        //update the meal plan
-        updatemealPlanPage();
-    }
 
     // these functions initialize the page to keep everything up to date
-    updatefoodItems();
-    updatemealPlanPage();
+    refreshMealPlanPage();
+    updateitemsAddedToMealPlan();
 });
