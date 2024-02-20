@@ -1,5 +1,3 @@
-
-
 //this function will be called as soon as the page is loaded
 document.addEventListener('DOMContentLoaded', function () {
     //this creates an object for each recommended dish item on the recommeneded dish side of the screen, so that this information
